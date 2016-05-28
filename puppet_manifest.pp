@@ -22,6 +22,9 @@ class puppet {
   home => /home/monitor,	# Home directory is set to given path
   shell => /bin/bash,		# User's login shell
   }
+
+  # Create home directory
+  file { '/home/monitor':
+  ensure => directory		# Ensures monitor's home directory
+  }
 }
-
-

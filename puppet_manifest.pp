@@ -38,4 +38,9 @@ class puppet {
     creates => '/home/monitor/scripts/memory_check',
     path    => '/usr/bin/'
   }
+  
+  # Creates src directory and and softlink my_memory_check
+  file { '/home/monitor/src':
+    
+  }
 }

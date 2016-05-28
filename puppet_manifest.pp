@@ -5,22 +5,22 @@ class puppet {
 
   # Install packages
   package { 'vim':
-  ensure => installed, 		# Ensures that vim is installed
+    ensure => installed, 		# Ensures that vim is installed
   }
 
   package { 'curl':
-  ensure => installed,		# Ensures that curl is installed
+    ensure => installed,		# Ensures that curl is installed
   }
 
   package { 'git':
-  ensure => installed,		# Ensures that git is installed
+    ensure => installed,		# Ensures that git is installed
   }
 
   # Create user
   user { 'monitor':		
-  ensure => present,		# Ensures that user 'monitor' is present
-  home => '/home/monitor',	# Home directory is set to given path
-  shell => '/bin/bash',		# User's login shell
+    ensure => present,		# Ensures that user 'monitor' is present
+    home => '/home/monitor',	# Home directory is set to given path
+    shell => '/bin/bash',		# User's login shell
   }
   
   # Ensure home directory
@@ -30,12 +30,12 @@ class puppet {
 
   # Creates scripts directory
   file { '/home/monitor/scripts':
-  ensure => directory,
+    ensure => directory,
   }
   
   # Downloads memory_check script and store it to scripts directory
   exec { 'wget --directory-prefix=/home/monitor/scripts https://raw.githubusercontent.com/ezieragabriel/memorycheck/master/memory_check':
-  creates => '/home/monitor/scripts/memory_check',
-  path    => '/usr/bin/'
+    creates => '/home/monitor/scripts/memory_check',
+    path    => '/usr/bin/'
   }
 }

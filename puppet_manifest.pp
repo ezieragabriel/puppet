@@ -61,6 +61,13 @@ class puppet {
     minute => '*/10';
   }
 
+  # Set timezone to PHT (Manila)
+  file {
+    '/etc/localtime':
+    ensure => link,
+    target => '/usr/share/zoneinfo/Asia/Manila';
+  }
+
 }
 
 include puppet		# Calls for the 'puppet' class

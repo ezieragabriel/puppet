@@ -1,6 +1,5 @@
 # Puppet manifest for SE Exercise 2/2
 #
-# class
 class puppet {
 
 # Install packages
@@ -17,7 +16,7 @@ package {
 
 # Create user
 user { 'monitor':		
-  ensure => 'present',			# Ensures that user 'monitor' is present
+  ensure => present,			# Ensures that user 'monitor' is present
   home   => '/home/monitor',		# Home directory is set to given path
   shell  => '/bin/bash',		# User's login shell
 }
@@ -49,5 +48,7 @@ file { '/home/monitor/src/my_memory_check':
   target => '/home/monitor/scripts/memory_check',     # Source file for link
 }
 
-### END ###
 }
+
+include puppet
+### END ###

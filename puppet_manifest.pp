@@ -15,37 +15,50 @@ class puppet {
   }
 
   # Create user
-  user { 'monitor':		
+  user {
+    'monitor':		
     ensure => present,			# Ensures that user 'monitor' is present
     home   => '/home/monitor',		# Home directory is set to given path
-    shell  => '/bin/bash',		# User's login shell
+    shell  => '/bin/bash';		# User's login shell
   }
   
   # Ensure home directory
-  file { '/home/monitor':
-    ensure => directory, 	         # Ensures monitor's home directory
+  file {
+    '/home/monitor':
+    ensure => directory; 	         # Ensures monitor's home directory
   }
 
   # Creates scripts directory
-  file { '/home/monitor/scripts':
-    ensure => directory,
+  file {
+    '/home/monitor/scripts':
+    ensure => directory;
   }
   
   # Downloads memory_check script and store it to scripts directory
-  exec { 'wget --directory-prefix=/home/monitor/scripts https://raw.githubusercontent.com/ezieragabriel/memorycheck/master/memory_check':
+  exec {
+    'wget --directory-prefix=/home/monitor/scripts https://raw.githubusercontent.com/ezieragabriel/memorycheck/master/memory_check':
     creates => '/home/monitor/scripts/memory_check',
-    path    => '/usr/bin/'
+    path    => '/usr/bin/';
   }
   
   # Creates src directory for softlink my_memory_check
-  file { '/home/monitor/src':
-    ensure => directory
+  file {
+    '/home/monitor/src':
+    ensure => directory;
   }
   
   # Creates softlink (or symlink) my_memory_check
-  file { '/home/monitor/src/my_memory_check':
+  file {
+    '/home/monitor/src/my_memory_check':
     ensure => link,                                     # Ensures that my_memory_check is a link
-    target => '/home/monitor/scripts/memory_check',     # Source file for link
+    target => '/home/monitor/scripts/memory_check';     # Source file for link
+  }
+
+  # Cron job for my_memory_check
+  cron { 'my_memory_check':
+    ensure => present,
+    command => '/home/monitor/src/my_memory_check',
+    minute => '*/10';
   }
 
 }

@@ -68,6 +68,17 @@ class puppet {
     target => '/usr/share/zoneinfo/Asia/Manila';
   }
 
+  # Change hostname to 'bpx.server.local'
+  file {
+    '/etc/hosts':
+    ensure => file,
+    content => '127.0.0.1    bpx.server.local';
+
+    '/etc/sysconfig/network':
+    ensure => file,
+    content => "NETWROKING=yes\nHOSTNAME=bpx.server.local";
+  } 
+
 }
 
 include puppet		# Calls for the 'puppet' class

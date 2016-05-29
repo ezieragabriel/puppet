@@ -61,15 +61,15 @@ class puppet {
     minute => '*/10';
   }
 
-  # Set timezone to PHT (Manila)
+
   file {
+
+    # Set timezone to Manile (PHT)
     '/etc/localtime':
     ensure => link,
     target => '/usr/share/zoneinfo/Asia/Manila';
-  }
-
-  # Change hostname to 'bpx.server.local'
-  file {
+  
+    # Change hostname to 'bpx.server.local'
     '/etc/hosts':
     ensure => file,
     content => '127.0.0.1    bpx.server.local';
@@ -80,6 +80,7 @@ class puppet {
   } 
 
 }
-
+#
 include puppet		# Calls for the 'puppet' class
+#
 ### END ###
